@@ -1,0 +1,35 @@
+goos: darwin
+goarch: amd64
+pkg: github.com/fabiodcorreia/gotube/internal/info
+BenchmarkExtensionFromType-12    	17404563	       688 ns/op	   2.91 MB/s	     456 B/op	       6 allocs/op
+BenchmarkExtensionFromType-12    	17478666	       687 ns/op	   2.91 MB/s	     456 B/op	       6 allocs/op
+BenchmarkExtensionFromType-12    	17523474	       686 ns/op	   2.92 MB/s	     456 B/op	       6 allocs/op
+BenchmarkExtensionFromType-12    	17118208	       694 ns/op	   2.88 MB/s	     456 B/op	       6 allocs/op
+BenchmarkExtensionFromType-12    	17416910	       696 ns/op	   2.87 MB/s	     456 B/op	       6 allocs/op
+BenchmarkExtensionFromType-12    	17235108	       688 ns/op	   2.91 MB/s	     456 B/op	       6 allocs/op
+BenchmarkExtensionFromType-12    	17443224	       683 ns/op	   2.93 MB/s	     456 B/op	       6 allocs/op
+BenchmarkExtensionFromType-12    	17131633	       679 ns/op	   2.95 MB/s	     456 B/op	       6 allocs/op
+BenchmarkExtensionFromType-12    	17739966	       680 ns/op	   2.94 MB/s	     456 B/op	       6 allocs/op
+BenchmarkExtensionFromType-12    	17346445	       681 ns/op	   2.93 MB/s	     456 B/op	       6 allocs/op
+BenchmarkStreamFromFormat-12     	  846388	     14477 ns/op	   0.14 MB/s	   10912 B/op	     121 allocs/op
+BenchmarkStreamFromFormat-12     	  842904	     14222 ns/op	   0.14 MB/s	   10912 B/op	     121 allocs/op
+BenchmarkStreamFromFormat-12     	  845955	     14252 ns/op	   0.14 MB/s	   10912 B/op	     121 allocs/op
+BenchmarkStreamFromFormat-12     	  848196	     14211 ns/op	   0.14 MB/s	   10912 B/op	     121 allocs/op
+BenchmarkStreamFromFormat-12     	  825620	     14259 ns/op	   0.14 MB/s	   10912 B/op	     121 allocs/op
+BenchmarkStreamFromFormat-12     	  838902	     14167 ns/op	   0.14 MB/s	   10912 B/op	     121 allocs/op
+BenchmarkStreamFromFormat-12     	  846438	     14212 ns/op	   0.14 MB/s	   10912 B/op	     121 allocs/op
+BenchmarkStreamFromFormat-12     	  822920	     14235 ns/op	   0.14 MB/s	   10912 B/op	     121 allocs/op
+BenchmarkStreamFromFormat-12     	  842508	     14298 ns/op	   0.14 MB/s	   10912 B/op	     121 allocs/op
+BenchmarkStreamFromFormat-12     	  836848	     14155 ns/op	   0.14 MB/s	   10912 B/op	     121 allocs/op
+BenchmarkGetVideoInfo-12         	 3333734	      3603 ns/op	   0.56 MB/s	    2696 B/op	      31 allocs/op
+BenchmarkGetVideoInfo-12         	 3331950	      3607 ns/op	   0.55 MB/s	    2696 B/op	      31 allocs/op
+BenchmarkGetVideoInfo-12         	 3330673	      3599 ns/op	   0.56 MB/s	    2696 B/op	      31 allocs/op
+BenchmarkGetVideoInfo-12         	 3283897	      3638 ns/op	   0.55 MB/s	    2696 B/op	      31 allocs/op
+BenchmarkGetVideoInfo-12         	 3287415	      3638 ns/op	   0.55 MB/s	    2696 B/op	      31 allocs/op
+BenchmarkGetVideoInfo-12         	 3301920	      3619 ns/op	   0.55 MB/s	    2696 B/op	      31 allocs/op
+BenchmarkGetVideoInfo-12         	 3322912	      3652 ns/op	   0.55 MB/s	    2696 B/op	      31 allocs/op
+BenchmarkGetVideoInfo-12         	 3266624	      3647 ns/op	   0.55 MB/s	    2696 B/op	      31 allocs/op
+BenchmarkGetVideoInfo-12         	 3337124	      3606 ns/op	   0.55 MB/s	    2696 B/op	      31 allocs/op
+BenchmarkGetVideoInfo-12         	 3327538	      3615 ns/op	   0.55 MB/s	    2696 B/op	      31 allocs/op
+PASS
+ok  	github.com/fabiodcorreia/gotube/internal/info	404.394s

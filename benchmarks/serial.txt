@@ -1,0 +1,15 @@
+goos: darwin
+goarch: amd64
+pkg: github.com/fabiodcorreia/gotube/internal/serial
+BenchmarkGetPlayerResponse-12    	10604941	      1128 ns/op	   1.77 MB/s	    1040 B/op	       5 allocs/op
+BenchmarkGetPlayerResponse-12    	10572243	      1128 ns/op	   1.77 MB/s	    1040 B/op	       5 allocs/op
+BenchmarkGetPlayerResponse-12    	10586522	      1129 ns/op	   1.77 MB/s	    1040 B/op	       5 allocs/op
+BenchmarkGetPlayerResponse-12    	10588920	      1127 ns/op	   1.77 MB/s	    1040 B/op	       5 allocs/op
+BenchmarkGetPlayerResponse-12    	10625623	      1129 ns/op	   1.77 MB/s	    1040 B/op	       5 allocs/op
+BenchmarkGetPlayerResponse-12    	10600982	      1139 ns/op	   1.76 MB/s	    1040 B/op	       5 allocs/op
+BenchmarkGetPlayerResponse-12    	10566495	      1134 ns/op	   1.76 MB/s	    1040 B/op	       5 allocs/op
+BenchmarkGetPlayerResponse-12    	10603369	      1147 ns/op	   1.74 MB/s	    1040 B/op	       5 allocs/op
+BenchmarkGetPlayerResponse-12    	10130356	      1173 ns/op	   1.71 MB/s	    1040 B/op	       5 allocs/op
+BenchmarkGetPlayerResponse-12    	10310983	      1165 ns/op	   1.72 MB/s	    1040 B/op	       5 allocs/op
+PASS
+ok  	github.com/fabiodcorreia/gotube/internal/serial	131.832s
