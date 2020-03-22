@@ -38,12 +38,8 @@ func TestExtractPlayerResp(t *testing.T) {
 		want    int
 		wantErr bool
 	}{
-		struct {
-			name    string
-			args    args
-			want    int
-			wantErr bool
-		}{
+
+		{
 			name: "Parse with success",
 			args: args{
 				gvInfo: getReader("../../testdata/get_video_info"),
@@ -139,12 +135,8 @@ func TestFindVideoID(t *testing.T) {
 		want    string
 		wantErr bool
 	}{
-		struct {
-			name    string
-			args    args
-			want    string
-			wantErr bool
-		}{
+
+		{
 			name: "Empty URL",
 			args: args{
 				url: "",

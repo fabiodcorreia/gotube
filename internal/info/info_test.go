@@ -43,11 +43,8 @@ func Test_streamFromFormat(t *testing.T) {
 		args    args
 		wantErr bool
 	}{
-		struct {
-			name    string
-			args    args
-			wantErr bool
-		}{
+
+		{
 			name: "Invalid Input Streams",
 			args: args{
 				ft: []serial.Format{{Itag: 1, ContentLength: "123", MimeType: "video/mp4;+codecs=\"avc1.64001F,+mp4a.40.2\"", Quality: "360p", URL: "http://..."}},
@@ -99,99 +96,72 @@ func Test_extensionFromType(t *testing.T) {
 		args    args
 		wantExt VideoExt
 	}{
-		struct {
-			name    string
-			args    args
-			wantExt VideoExt
-		}{
+
+		{
 			name: "Mp4-360p",
 			args: args{
 				mimeType: "video/mp4;+codecs=\"avc1.42001E,+mp4a.40.2\"",
 			},
 			wantExt: MP4,
 		},
-		struct {
-			name    string
-			args    args
-			wantExt VideoExt
-		}{
+
+		{
 			name: "Mp4-720p",
 			args: args{
 				mimeType: "video/mp4;+codecs=\"avc1.640028\"",
 			},
 			wantExt: MP4,
 		},
-		struct {
-			name    string
-			args    args
-			wantExt VideoExt
-		}{
+
+		{
 			name: "Mp4-1080p",
 			args: args{
 				mimeType: "video/mp4;+codecs=\"avc1.64002a\"",
 			},
 			wantExt: MP4,
 		},
-		struct {
-			name    string
-			args    args
-			wantExt VideoExt
-		}{
+
+		{
 			name: "3gp",
 			args: args{
 				mimeType: "video/3gp;+codecs=\"vp9\"",
 			},
 			wantExt: TGP,
 		},
-		struct {
-			name    string
-			args    args
-			wantExt VideoExt
-		}{
+
+		{
 			name: "avi",
 			args: args{
 				mimeType: "video/avi;+codecs=\"vp9\"",
 			},
 			wantExt: AVI,
 		},
-		struct {
-			name    string
-			args    args
-			wantExt VideoExt
-		}{
+
+		{
 			name: "flv",
 			args: args{
 				mimeType: "video/flv;+codecs=\"vp9\"",
 			},
 			wantExt: FLV,
 		},
-		struct {
-			name    string
-			args    args
-			wantExt VideoExt
-		}{
+
+		{
 			name: "Webm-1080p",
 			args: args{
 				mimeType: "video/webm;+codecs=\"vp9\"",
 			},
 			wantExt: WEBM,
 		},
-		struct {
-			name    string
-			args    args
-			wantExt VideoExt
-		}{
+
+		{
 			name: "Empty Type",
 			args: args{
 				mimeType: "",
 			},
 			wantExt: AVI,
 		},
-		struct {
-			name    string
-			args    args
-			wantExt VideoExt
-		}{
+
+		{
 			name: "Unknown Type",
 			args: args{
 				mimeType: "something",

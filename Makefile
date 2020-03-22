@@ -1,7 +1,8 @@
 COV_REPORT	:= coverage.out
 PKG			:= . ./internal/...
+SRC = $(shell find . -type f -name '*.go' -not -path "./vendor/*")
 
-test: format
+test:
 	go test $(PKG) -covermode=atomic
 
 cov: format
@@ -9,7 +10,7 @@ cov: format
 	go tool cover -func=$(COV_REPORT)
 
 format:
-	@gofmt -s -w *.go ./*/*.go && echo "Code Formatted"
+	gofmt -s -l -w $(SRC)
 
 bench:
 	go test -benchtime=10s -count=4 -benchmem -bench='Benchmark*' ./internal/serial 2>&1 | tee benchmarks/serial.txt

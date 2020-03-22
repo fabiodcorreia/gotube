@@ -65,12 +65,8 @@ func TestGetPlayerResponse(t *testing.T) {
 		want    PlayerResponse
 		wantErr bool
 	}{
-		struct {
-			name    string
-			args    args
-			want    PlayerResponse
-			wantErr bool
-		}{
+
+		{
 			name: "Unmarshal with success",
 			args: args{
 				jsonStr: getReader("../../testdata/player_response_ok.json"),
