@@ -109,7 +109,7 @@ func TestGetPlayerResponse(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := PlayerResponse{}
+			var got PlayerResponse
 			err := GetPlayerResponse(tt.args.jsonStr, &got)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("GetPlayerResponse() error = %v, wantErr %v", err, tt.wantErr)
@@ -130,7 +130,7 @@ func BenchmarkGetPlayerResponse(b *testing.B) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		rp := PlayerResponse{}
+		var rp PlayerResponse
 		GetPlayerResponse(r, &rp)
 	}
 }

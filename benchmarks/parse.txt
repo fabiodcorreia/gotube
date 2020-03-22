@@ -1,25 +1,13 @@
 goos: darwin
 goarch: amd64
 pkg: github.com/fabiodcorreia/gotube/internal/parse
-BenchmarkFindVideoID-12          	43733236	       277 ns/op	   7.23 MB/s	      32 B/op	       1 allocs/op
-BenchmarkFindVideoID-12          	43514186	       276 ns/op	   7.24 MB/s	      32 B/op	       1 allocs/op
-BenchmarkFindVideoID-12          	43457080	       274 ns/op	   7.30 MB/s	      32 B/op	       1 allocs/op
-BenchmarkFindVideoID-12          	43781262	       274 ns/op	   7.29 MB/s	      32 B/op	       1 allocs/op
-BenchmarkFindVideoID-12          	43141190	       274 ns/op	   7.29 MB/s	      32 B/op	       1 allocs/op
-BenchmarkFindVideoID-12          	44145440	       272 ns/op	   7.34 MB/s	      32 B/op	       1 allocs/op
-BenchmarkFindVideoID-12          	44151555	       272 ns/op	   7.35 MB/s	      32 B/op	       1 allocs/op
-BenchmarkFindVideoID-12          	43276590	       277 ns/op	   7.22 MB/s	      32 B/op	       1 allocs/op
-BenchmarkFindVideoID-12          	43554559	       275 ns/op	   7.27 MB/s	      32 B/op	       1 allocs/op
-BenchmarkFindVideoID-12          	43166935	       274 ns/op	   7.29 MB/s	      32 B/op	       1 allocs/op
-BenchmarkTestExtPlayerResp-12    	13492372	       901 ns/op	   2.22 MB/s	     592 B/op	       3 allocs/op
-BenchmarkTestExtPlayerResp-12    	13876736	       876 ns/op	   2.28 MB/s	     592 B/op	       3 allocs/op
-BenchmarkTestExtPlayerResp-12    	13682920	       898 ns/op	   2.23 MB/s	     592 B/op	       3 allocs/op
-BenchmarkTestExtPlayerResp-12    	13187209	       894 ns/op	   2.24 MB/s	     592 B/op	       3 allocs/op
-BenchmarkTestExtPlayerResp-12    	13638188	       878 ns/op	   2.28 MB/s	     592 B/op	       3 allocs/op
-BenchmarkTestExtPlayerResp-12    	13629392	       900 ns/op	   2.22 MB/s	     592 B/op	       3 allocs/op
-BenchmarkTestExtPlayerResp-12    	13474202	       887 ns/op	   2.26 MB/s	     592 B/op	       3 allocs/op
-BenchmarkTestExtPlayerResp-12    	13632087	       888 ns/op	   2.25 MB/s	     592 B/op	       3 allocs/op
-BenchmarkTestExtPlayerResp-12    	13447286	       886 ns/op	   2.26 MB/s	     592 B/op	       3 allocs/op
-BenchmarkTestExtPlayerResp-12    	13573152	       886 ns/op	   2.26 MB/s	     592 B/op	       3 allocs/op
+BenchmarkFindVideoID-12          	44404430	       271 ns/op	   7.38 MB/s	      32 B/op	       1 allocs/op
+BenchmarkFindVideoID-12          	43807440	       274 ns/op	   7.30 MB/s	      32 B/op	       1 allocs/op
+BenchmarkFindVideoID-12          	43628918	       274 ns/op	   7.31 MB/s	      32 B/op	       1 allocs/op
+BenchmarkFindVideoID-12          	43747906	       274 ns/op	   7.30 MB/s	      32 B/op	       1 allocs/op
+BenchmarkTestExtPlayerResp-12    	13615814	       885 ns/op	   2.26 MB/s	     592 B/op	       3 allocs/op
+BenchmarkTestExtPlayerResp-12    	13695537	       877 ns/op	   2.28 MB/s	     592 B/op	       3 allocs/op
+BenchmarkTestExtPlayerResp-12    	13717638	       877 ns/op	   2.28 MB/s	     592 B/op	       3 allocs/op
+BenchmarkTestExtPlayerResp-12    	13658666	       878 ns/op	   2.28 MB/s	     592 B/op	       3 allocs/op
 PASS
-ok  	github.com/fabiodcorreia/gotube/internal/parse	252.515s
+ok  	github.com/fabiodcorreia/gotube/internal/parse	100.895s

@@ -4,12 +4,32 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"time"
+	"runtime"
+	"runtime/pprof"
+	"runtime/trace"
 
 	"github.com/fabiodcorreia/gotube"
 )
 
 func main() {
+	ft, err := os.Create("./trace.out")
+	if err != nil {
+		log.Fatal("could not create CPU profile: ", err)
+	}
+	trace.Start(ft)
+	defer trace.Stop()
+	defer ft.Close()
+
+	fc, err := os.Create("./cpu.pprof")
+	if err != nil {
+		log.Fatal("could not create CPU profile: ", err)
+	}
+	defer fc.Close()
+	if err := pprof.StartCPUProfile(fc); err != nil {
+		log.Fatal("could not start CPU profile: ", err)
+	}
+	defer pprof.StopCPUProfile()
+
 	target := "https://www.youtube.com/watch?v=urarTyKn9cg2"
 
 	v, err := gotube.GetVideoDetails(target)
@@ -19,40 +39,27 @@ func main() {
 
 	fmt.Println(v.Streams[0].ContentLength)
 
-	file, err := os.Create("./Default-" + v.Title + v.Streams[0].Extension)
+	file, err := os.Create("./" + v.Title + string(v.Streams[0].Extension))
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
-	file2, err := os.Create("./Custom-" + v.Title + v.Streams[0].Extension)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	start := time.Now()
-
-	_, err = v.DownloadDefault(file)
+	bc2, err := v.Download(file)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	end1 := time.Now()
+	fmt.Println(bc2)
 
-	_, err = v.Download(file2)
+	fm, err := os.Create("./mem.pprof")
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatal("could not create memory profile: ", err)
 	}
-
-	end2 := time.Now()
-
-	fmt.Printf("Download with Default Client:  %d\n", (end1.Unix() - start.Unix()))
-	fmt.Printf("Download with Custom Client: %d\n", (end2.Unix() - end1.Unix()))
+	defer fm.Close()
+	runtime.GC() // get up-to-date statistics
+	if err := pprof.WriteHeapProfile(fm); err != nil {
+		log.Fatal("could not write memory profile: ", err)
+	}
 
 }
-
-// go run cmd/main.go  1,23s user 1,30s system 12% cpu 20,883 total
-// go run cmd/main.go  0,85s user 0,85s system 12% cpu 13,614 total
-// go run cmd/main.go  0,92s user 0,90s system 13% cpu 13,715 total
-// go run cmd/main.go  1,61s user 1,77s system 13% cpu 25,408 total

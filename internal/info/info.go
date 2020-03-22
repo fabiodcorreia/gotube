@@ -2,7 +2,7 @@ package info
 
 import (
 	"fmt"
-	"mime"
+	"regexp"
 	"strconv"
 
 	"github.com/fabiodcorreia/gotube/internal/serial"
@@ -19,12 +19,15 @@ type VideoInfo struct {
 // VideoQuality represents the video quality of the stream, 360p or 720p
 type VideoQuality string
 
+// VideoExt represent the file extension of the video based on the mime type
+type VideoExt string
+
 // Stream holds the video stream sources and content details
 type Stream struct {
 	URL           string
 	MimeType      string
-	Extension     string
-	ContentLength string
+	Extension     VideoExt
+	ContentLength int
 	Quality       VideoQuality
 }
 
@@ -57,30 +60,58 @@ func streamFromFormat(formats []serial.Format, streams []Stream) error {
 	if streams == nil {
 		return fmt.Errorf("info.streamFromFormat.streams: slice is nil")
 	}
+	var cl int
+	var err error
 	for i := 0; i < len(formats); i++ {
-		ext, err := extensionFromType(formats[i].MimeType)
-		if err != nil {
-			return err
+		if formats[i].ContentLength != "" {
+			cl, err = strconv.Atoi(formats[i].ContentLength)
+			if err != nil {
+				return fmt.Errorf("info.streamFromFormat.ContentLength: %w", err)
+			}
+		} else {
+			cl = 0
 		}
+
 		streams[i] = Stream{
 			URL:           formats[i].URL,
-			ContentLength: formats[i].ContentLength,
+			ContentLength: cl,
 			MimeType:      formats[i].MimeType,
 			Quality:       VideoQuality(formats[i].Quality),
-			Extension:     ext,
+			Extension:     extensionFromType(formats[i].MimeType),
 		}
 	}
 	return nil
 }
 
-//TODO this mime.ExtensionsByType is very heavy
-func extensionFromType(mimeType string) (ext string, err error) {
-	exts, err := mime.ExtensionsByType(mimeType)
-	if err != nil {
-		return ext, fmt.Errorf("info.extensionFromType.ExtensionByType: %w", err)
+const (
+	MP4  VideoExt = ".mp4"
+	TGP           = ".3gp"
+	FLV           = ".flv"
+	WEBM          = ".webm"
+	AVI           = ".avi"
+)
+
+const videoTypePattern = "video\\/(\\w+)"
+
+var videoTypeRegexp = regexp.MustCompile(videoTypePattern)
+
+// mime.ExtensionByType is very heavy compared with regex, benchmark on info_test
+func extensionFromType(mimeType string) VideoExt {
+	match := videoTypeRegexp.FindStringSubmatch(mimeType)
+	if match == nil || len(match) == 1 {
+		return AVI
 	}
-	if len(exts) == 0 {
-		return ext, fmt.Errorf("info.extensionFromType.NoMatch: Extension not found for type %s", mimeType)
+
+	switch match[1] {
+	case "mp4":
+		return MP4
+	case "3gp":
+		return TGP
+	case "flv":
+		return FLV
+	case "webm":
+		return WEBM
+	default:
+		return AVI
 	}
-	return exts[0], nil
 }

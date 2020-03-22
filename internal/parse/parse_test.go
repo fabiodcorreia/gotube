@@ -176,6 +176,13 @@ func TestFindVideoID(t *testing.T) {
 			want:    "EFJfdWzBHwE",
 			wantErr: false,
 		},
+		{
+			name: "Invalid too long",
+			args: args{
+				url: "https://www.youtube.com/watch?v=EFJfdWzBHwE&list=PL2ntRZ1ySWBdDyspRTNBIKES1Y-P__59_&index=4&list=PL2ntRZ1ySWBdDyspRTNBIKES1Y-P__59_&index=4&list=PL2ntRZ1ySWBdDyspRTNBIKES1Y-P__59_&index=4&list=PL2ntRZ1ySWBdDyspRTNBIKES1Y-P__59_&index=4&list=PL2ntRZ1ySWBdDyspRTNBIKES1Y-P__59_&index=4&list=PL2ntRZ1ySWBdDyspRTNBIKES1Y-P__59_&index=4&list=PL2ntRZ1ySWBdDyspRTNBIKES1Y-P__59_&index=4&list=PL2ntRZ1ySWBdDyspRTNBIKES1Y-P__59_&index=4",
+			},
+			wantErr: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -200,6 +207,13 @@ func BenchmarkFindVideoID(b *testing.B) {
 	}
 }
 
+// The benchmarks using url.Query are:
+//
+// BenchmarkFindVideoID-12          	14122687	       848 ns/op	   2.36 MB/s	     576 B/op	       6 allocs/op
+//
+// against this implementation with
+//
+// BenchmarkFindVideoID-12          	43733236	       277 ns/op	   7.23 MB/s	      32 B/op	       1 allocs/op
 func BenchmarkTestExtPlayerResp(b *testing.B) {
 	r := getReader("../../testdata/get_video_info")
 	b.SetBytes(2)

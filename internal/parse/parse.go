@@ -69,6 +69,8 @@ const (
 var videoRegexp = regexp.MustCompile(videoIDPattern)
 
 // FindVideoID receives an youtube video url and return the videoId of that video
+//
+// Performance using url.Parse is a lot slower then with regex, benchmarks on parse_test.go
 func FindVideoID(url string) (videoID string, err error) {
 	if url == "" {
 		return videoID, fmt.Errorf("parse.FindVideoID.url: url can't be empty")

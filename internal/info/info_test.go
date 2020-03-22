@@ -77,11 +77,12 @@ func Test_streamFromFormat(t *testing.T) {
 				ft: []serial.Format{{Itag: 1, ContentLength: "123", MimeType: "video", Quality: "360p", URL: "http://..."}},
 				st: make([]Stream, 1),
 			},
-			wantErr: true,
+			wantErr: false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+
 			if err := streamFromFormat(tt.args.ft, tt.args.st); (err != nil) != tt.wantErr {
 				t.Errorf("streamFromFormat() error = %v, wantErr %v", err, tt.wantErr)
 			}
@@ -96,94 +97,112 @@ func Test_extensionFromType(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		wantExt string
-		wantErr bool
+		wantExt VideoExt
 	}{
 		struct {
 			name    string
 			args    args
-			wantExt string
-			wantErr bool
+			wantExt VideoExt
 		}{
 			name: "Mp4-360p",
 			args: args{
 				mimeType: "video/mp4;+codecs=\"avc1.42001E,+mp4a.40.2\"",
 			},
-			wantExt: ".mp4",
-			wantErr: false,
+			wantExt: MP4,
 		},
 		struct {
 			name    string
 			args    args
-			wantExt string
-			wantErr bool
+			wantExt VideoExt
 		}{
 			name: "Mp4-720p",
 			args: args{
 				mimeType: "video/mp4;+codecs=\"avc1.640028\"",
 			},
-			wantExt: ".mp4",
-			wantErr: false,
+			wantExt: MP4,
 		},
 		struct {
 			name    string
 			args    args
-			wantExt string
-			wantErr bool
+			wantExt VideoExt
 		}{
 			name: "Mp4-1080p",
 			args: args{
 				mimeType: "video/mp4;+codecs=\"avc1.64002a\"",
 			},
-			wantExt: ".mp4",
-			wantErr: false,
+			wantExt: MP4,
 		},
 		struct {
 			name    string
 			args    args
-			wantExt string
-			wantErr bool
+			wantExt VideoExt
+		}{
+			name: "3gp",
+			args: args{
+				mimeType: "video/3gp;+codecs=\"vp9\"",
+			},
+			wantExt: TGP,
+		},
+		struct {
+			name    string
+			args    args
+			wantExt VideoExt
+		}{
+			name: "avi",
+			args: args{
+				mimeType: "video/avi;+codecs=\"vp9\"",
+			},
+			wantExt: AVI,
+		},
+		struct {
+			name    string
+			args    args
+			wantExt VideoExt
+		}{
+			name: "flv",
+			args: args{
+				mimeType: "video/flv;+codecs=\"vp9\"",
+			},
+			wantExt: FLV,
+		},
+		struct {
+			name    string
+			args    args
+			wantExt VideoExt
 		}{
 			name: "Webm-1080p",
 			args: args{
 				mimeType: "video/webm;+codecs=\"vp9\"",
 			},
-			wantExt: ".webm",
-			wantErr: false,
+			wantExt: WEBM,
 		},
 		struct {
 			name    string
 			args    args
-			wantExt string
-			wantErr bool
+			wantExt VideoExt
 		}{
 			name: "Empty Type",
 			args: args{
 				mimeType: "",
 			},
-			wantErr: true,
+			wantExt: AVI,
 		},
 		struct {
 			name    string
 			args    args
-			wantExt string
-			wantErr bool
+			wantExt VideoExt
 		}{
 			name: "Unknown Type",
 			args: args{
 				mimeType: "something",
 			},
-			wantErr: true,
+			wantExt: AVI,
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotExt, err := extensionFromType(tt.args.mimeType)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("extensionFromType() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
+			gotExt := extensionFromType(tt.args.mimeType)
 			if gotExt != tt.wantExt {
 				t.Errorf("extensionFromType() = %v, want %v", gotExt, tt.wantExt)
 			}
@@ -191,6 +210,13 @@ func Test_extensionFromType(t *testing.T) {
 	}
 }
 
+// Benchmark with mime.ExtensionsByType is more costly
+//
+// BenchmarkExtensionFromType-12    	17404563	       688 ns/op	   2.91 MB/s	     456 B/op	       6 allocs/op
+//
+// against this implementation with
+//
+// BenchmarkExtensionFromType-12    	50939827	       232 ns/op	   8.62 MB/s	      32 B/op	       1 allocs/op
 func BenchmarkExtensionFromType(b *testing.B) {
 	b.SetBytes(2)
 	b.ResetTimer()
